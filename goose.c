@@ -27,7 +27,7 @@ int main(int argc, char* argv[])
     IniToStruct(ini, &gooseTxMassage, &gooseRxMassage);
     iniparser_freedict(ini);
 
-    printf("main: %d\r\n", gooseTxMassage.numGoCb);
+    printf("main: %d\r\n", gooseTxMassage.gocd[0].numDatSetEntriess);
 
     return 0;
 }
@@ -70,26 +70,23 @@ void IniToStruct(const dictionary* dict, GooseTxRxMessage* gooseTxMassage, Goose
                     DictStrTrim(dict->key[i], strTrim);
                     if(strcmp(strTrim, "GoCBRef") == 0)
                     {
-                        strncpy(gooseTxMassage->gocd[numGocb]->gocbRef, dict->val[i], 20);
-                        printf("%s\r\n", dict->val[i]);
-                        printf("%s\r\n", gooseTxMassage->gocd[numGocb]->gocbRef);
-                        printf("end\n");
+                        strncpy(gooseTxMassage->gocd[numGocb-1].gocbRef, dict->val[i], strlen(dict->val[i])+1);
                     }
                     else if(strcmp(strTrim, "AppID") == 0)
                     {
-                        strncpy(gooseTxMassage->gocd[numGocb]->appID, dict->val[i], strlen(dict->val[i]));
+                        strncpy(gooseTxMassage->gocd[numGocb-1].appID, dict->val[i], strlen(dict->val[i])+1);
                     }
                     else if(strcmp(strTrim, "DatSet") == 0)
                     {
-                        strncpy(gooseTxMassage->gocd[numGocb]->datSet, dict->val[i], strlen(dict->val[i]));
+                        strncpy(gooseTxMassage->gocd[numGocb-1].datSet, dict->val[i], strlen(dict->val[i])+1);
                     }
                     else if(strcmp(strTrim, "ConfRev") == 0)
                     {
-                        gooseTxMassage->gocd[numGocb]->confRev = CharToInt(dict->val[i]);
+                        gooseTxMassage->gocd[numGocb-1].confRev = CharToInt(dict->val[i]);
                     }
                     else if(strcmp(strTrim, "numDatSetEntries") == 0)
                     {
-                        gooseTxMassage->gocd[numGocb]->numDatSetEntriess = CharToInt(dict->val[i]);
+                        gooseTxMassage->gocd[numGocb-1].numDatSetEntriess = CharToInt(dict->val[i]);
                         FcdaStructInit(gooseTxMassage);
                     }
                 }
@@ -98,27 +95,27 @@ void IniToStruct(const dictionary* dict, GooseTxRxMessage* gooseTxMassage, Goose
                     DictStrTrim(dict->key[i], strTrim);
                     if(strcmp(strTrim, "Addr") == 0)
                     {
-                        AddrToInt(dict->val[i], gooseTxMassage->gocd[numGocb]->addr);
+                        AddrToInt(dict->val[i], gooseTxMassage->gocd[numGocb-1].addr);
                     }
                     else if(strcmp(strTrim, "Priority") == 0)
                     {
-                        gooseTxMassage->gocd[numGocb]->priority = CharToInt(dict->val[i]);
+                        gooseTxMassage->gocd[numGocb-1].priority = CharToInt(dict->val[i]);
                     }
                     else if(strcmp(strTrim, "VID") == 0)
                     {
-                        gooseTxMassage->gocd[numGocb]->vid = CharToInt(dict->val[i]);
+                        gooseTxMassage->gocd[numGocb-1].vid = CharToInt(dict->val[i]);
                     }
                     else if(strcmp(strTrim, "Appid") == 0)
                     {
-                        gooseTxMassage->gocd[numGocb]->appid = HexToInt(dict->val[i], 4);
+                        gooseTxMassage->gocd[numGocb-1].appid = HexToInt(dict->val[i], 4);
                     }
                     else if(strcmp(strTrim, "MinTime") == 0)
                     {
-                        gooseTxMassage->gocd[numGocb]->minTime = CharToInt(dict->val[i]);
+                        gooseTxMassage->gocd[numGocb-1].minTime = CharToInt(dict->val[i]);
                     }
                     else if(strcmp(strTrim, "MaxTime") == 0)
                     {
-                        gooseTxMassage->gocd[numGocb]->maxTime = CharToInt(dict->val[i]);
+                        gooseTxMassage->gocd[numGocb-1].maxTime = CharToInt(dict->val[i]);
                     }
                 }
                 else if(strncmp(dict->key[i], "FCDA", strlen("FCDA")) == 0)
@@ -126,19 +123,19 @@ void IniToStruct(const dictionary* dict, GooseTxRxMessage* gooseTxMassage, Goose
                     DictStrTrim(dict->key[i], strTrim);
                     if(strcmp(strTrim, "Ref") == 0)
                     {
-                        strncpy(gooseTxMassage->gocd[numGocb]->device.fcda[numFcda].ref, dict->val[i], strlen(dict->val[i]));
+                        strncpy(gooseTxMassage->gocd[numGocb-1].device.fcda[numFcda-1].ref, dict->val[i], strlen(dict->val[i])+1);
                     }
                     else if(strcmp(strTrim, "Type") == 0)
                     {
-                        strncpy(gooseTxMassage->gocd[numGocb]->device.fcda[numFcda].type, dict->val[i], strlen(dict->val[i]));
+                        strncpy(gooseTxMassage->gocd[numGocb-1].device.fcda[numFcda-1].type, dict->val[i], strlen(dict->val[i])+1);
                     }
                     else if(strcmp(strTrim, "InVarName") == 0)
                     {
-                        strncpy(gooseTxMassage->gocd[numGocb]->device.fcda[numFcda].inVarName, dict->val[i], strlen(dict->val[i]));
+                        strncpy(gooseTxMassage->gocd[numGocb-1].device.fcda[numFcda-1].inVarName, dict->val[i], strlen(dict->val[i])+1);
                     }
                     else if(strcmp(strTrim, "ACT") == 0)
                     {
-                        gooseTxMassage->gocd[numGocb]->device.fcda[numFcda].act = CharToInt(dict->val[i]);
+                        gooseTxMassage->gocd[numGocb-1].device.fcda[numFcda-1].act = CharToInt(dict->val[i]);
                     }
                 }
 
@@ -163,31 +160,31 @@ void IniToStruct(const dictionary* dict, GooseTxRxMessage* gooseTxMassage, Goose
                     DictStrTrim(dict->key[i], strTrim);
                     if(strcmp(dict->key[i], "Addr") == 0)
                     {
-                        AddrToInt(dict->val[i], gooseRxMassage->gocd[numGocb]->addr);
+                        AddrToInt(dict->val[i], gooseRxMassage->gocd[numGocb-1].addr);
                     }
                     else if(strcmp(dict->key[i], "Appid") == 0)
                     {
-                        gooseRxMassage->gocd[numGocb]->appid = HexToInt(dict->val[i], 4);
+                        gooseRxMassage->gocd[numGocb-1].appid = HexToInt(dict->val[i], 4);
                     }
                     else if(strcmp(dict->key[i], "GoCBRef") == 0)
                     {
-                        strncpy(gooseRxMassage->gocd[numGocb]->gocbRef, dict->val[i], strlen(dict->val[i]));
+                        strncpy(gooseRxMassage->gocd[numGocb-1].gocbRef, dict->val[i], strlen(dict->val[i])+1);
                     }
                     else if(strcmp(dict->key[i], "AppID") == 0)
                     {
-                        strncpy(gooseRxMassage->gocd[numGocb]->appID, dict->val[i], strlen(dict->val[i]));
+                        strncpy(gooseRxMassage->gocd[numGocb-1].appID, dict->val[i], strlen(dict->val[i])+1);
                     }
                     else if(strcmp(dict->key[i], "DatSet") == 0)
                     {
-                        strncpy(gooseRxMassage->gocd[numGocb]->datSet, dict->val[i], strlen(dict->val[i]));
+                        strncpy(gooseRxMassage->gocd[numGocb-1].datSet, dict->val[i], strlen(dict->val[i])+1);
                     }
                     else if(strcmp(dict->key[i], "ConfRev") == 0)
                     {
-                        gooseRxMassage->gocd[numGocb]->confRev = CharToInt(dict->val[i]);
+                        gooseRxMassage->gocd[numGocb-1].confRev = CharToInt(dict->val[i]);
                     }
                     else if(strcmp(dict->key[i], "numDatSetEntries") == 0)
                     {
-                        gooseRxMassage->gocd[numGocb]->numDatSetEntriess = CharToInt(dict->val[i]);
+                        gooseRxMassage->gocd[numGocb-1].numDatSetEntriess = CharToInt(dict->val[i]);
                         GoInputStructInit(gooseRxMassage);
                     }
                 }
@@ -196,23 +193,23 @@ void IniToStruct(const dictionary* dict, GooseTxRxMessage* gooseTxMassage, Goose
                     DictStrTrim(dict->key[i], strTrim);
                     if(strcmp(dict->key[i], "GoCbIndex") == 0)
                     {
-                        gooseRxMassage->gocd[numGocb]->device.input[numInput].gocbIndex = CharToInt(dict->val[i]);
+                        gooseRxMassage->gocd[numGocb-1].device.input[numInput-1].gocbIndex = CharToInt(dict->val[i]);
                     }
                     else if(strcmp(dict->key[i], "GoCbEntryIndex") == 0)
                     {
-                        gooseRxMassage->gocd[numGocb]->device.input[numInput].gocbEntryIntex = CharToInt(dict->val[i]);
+                        gooseRxMassage->gocd[numGocb-1].device.input[numInput-1].gocbEntryIntex = CharToInt(dict->val[i]);
                     }
                     else if(strcmp(dict->key[i], "Ref") == 0)
                     {
-                        strncpy(gooseRxMassage->gocd[numGocb]->device.input[numInput].ref, dict->val[i], strlen(dict->val[i]));
+                        strncpy(gooseRxMassage->gocd[numGocb-1].device.input[numInput-1].ref, dict->val[i], strlen(dict->val[i])+1);
                     }
                     else if(strcmp(dict->key[i], "Type") == 0)
                     {
-                        strncpy(gooseRxMassage->gocd[numGocb]->device.input[numInput].type, dict->val[i], strlen(dict->val[i]));
+                        strncpy(gooseRxMassage->gocd[numGocb-1].device.input[numInput-1].type, dict->val[i], strlen(dict->val[i])+1);
                     }
                     else if(strcmp(dict->key[i], "OutVarName") == 0)
                     {
-                        strncpy(gooseRxMassage->gocd[numGocb]->device.input[numInput].outVarName, dict->val[i], strlen(dict->val[i]));
+                        strncpy(gooseRxMassage->gocd[numGocb-1].device.input[numInput-1].outVarName, dict->val[i], strlen(dict->val[i])+1);
                     }
                 }
 
@@ -289,22 +286,24 @@ void GooseMessageInit(GooseTxRxMessage* gooseTxMassage, GooseTxRxMessage* gooseR
 void GocbStructInit(GooseTxRxMessage* gooseMassage)
 {
     uint32_t i = 0;
-    GooseControlBlock* goCB[gooseMassage->numGoCb];
-    gooseMassage->gocd = goCB;
-    for(i=0; i<gooseMassage->numGoCb; i++)
+   
+    gooseMassage->gocd  = (GooseControlBlock*)calloc(sizeof(GooseControlBlock), gooseMassage->numGoCb);
+   
+    if (!gooseMassage->gocd)
     {
-        goCB[i] = malloc(sizeof(GooseControlBlock));
+        printf("DEBUG:%s():%d:gooseMassage->gocd Malloc!\n", __FUNCTION__, __LINE__);
+        return;
     }
 
     for(i=0; i<gooseMassage->numGoCb; i++)
     {
         if(gooseMassage->flagTxRx == 1)
         {
-            gooseMassage->gocd[i]->device.fcda == NULL;
+            gooseMassage->gocd[i].device.fcda == NULL;
         }
         if(gooseMassage->flagTxRx == 2)
         {
-            gooseMassage->gocd[i]->device.input == NULL;
+            gooseMassage->gocd[i].device.input == NULL;
         }
     }
 }
@@ -315,8 +314,7 @@ void FcdaStructInit(GooseTxRxMessage* gooseMassage)
     uint32_t j = 0;
     for(j=0; j<gooseMassage->numGoCb; j++)
     {
-        FuncConDatAttr funcConDatAttr[gooseMassage->gocd[j]->numDatSetEntriess];
-        gooseMassage->gocd[j]->device.fcda = funcConDatAttr;
+        gooseMassage->gocd[j].device.fcda = (FuncConDatAttr*)calloc(sizeof(FuncConDatAttr), gooseMassage->gocd[j].numDatSetEntriess);
     }
     
 }
@@ -327,8 +325,7 @@ void GoInputStructInit(GooseTxRxMessage* gooseMassage)
     uint32_t j = 0;
     for(j=0; j<gooseMassage->numGoCb; j++)
     {
-        FuncConDatAttr GooseInput[gooseMassage->gocd[j]->numDatSetEntriess];
-        gooseMassage->gocd[j]->device.fcda = GooseInput;
+        gooseMassage->gocd[j].device.input = (GooseInput*)calloc(sizeof(GooseInput), gooseMassage->gocd[j].numDatSetEntriess);
     }
     
 }

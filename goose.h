@@ -81,7 +81,7 @@ typedef struct TagGooseTxRxMessage
         uint32_t numInput;
         uint32_t numOutput;
     }num;
-    GooseControlBlock** gocd;
+    GooseControlBlock* gocd;
 }GooseTxRxMessage;
 
 
