@@ -14,7 +14,7 @@
 
 
 #define MAXSIZE 40
-#define TYPESIZE 4
+#define TYPESIZE 8
 #define APPIDSIZE 16
 
 

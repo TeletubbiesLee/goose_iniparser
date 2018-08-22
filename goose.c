@@ -27,7 +27,7 @@ int main(int argc, char* argv[])
     IniToStruct(ini, &gooseTxMassage, &gooseRxMassage);
     iniparser_freedict(ini);
 
-    printf("main: %d\r\n", gooseTxMassage.gocd[0].numDatSetEntriess);
+    printf("main: %s\r\n", gooseTxMassage.gocd[0].device.fcda->type);
 
     return 0;
 }
@@ -291,7 +291,7 @@ void GocbStructInit(GooseTxRxMessage* gooseMassage)
    
     if (!gooseMassage->gocd)
     {
-        printf("DEBUG:%s():%d:gooseMassage->gocd Malloc!\n", __FUNCTION__, __LINE__);
+        printf("DEBUG:%s():%d:gooseMassage->gocd Malloc Fail!\n", __FUNCTION__, __LINE__);
         return;
     }
 
@@ -315,6 +315,12 @@ void FcdaStructInit(GooseTxRxMessage* gooseMassage)
     for(j=0; j<gooseMassage->numGoCb; j++)
     {
         gooseMassage->gocd[j].device.fcda = (FuncConDatAttr*)calloc(sizeof(FuncConDatAttr), gooseMassage->gocd[j].numDatSetEntriess);
+
+        if (!gooseMassage->gocd[j].device.fcda)
+        {
+            printf("DEBUG:%s():%d:gooseMassage->gocd[j].device.fcda Malloc Fail!\n", __FUNCTION__, __LINE__);
+            return;
+        }
     }
     
 }
