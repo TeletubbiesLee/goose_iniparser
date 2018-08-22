@@ -1,0 +1,140 @@
+[GOOSE Tx]
+numGoCb             = 1
+
+[GoCB1]
+GoCBRef             = P220ML1PROT/LLN0$GO$gocb0
+AppID               = P220ML1Trip
+DatSet              = P220ML1PROT/LLN0$dsGOOSE0
+ConfRev             = 1
+numDatSetEntries    = 2
+
+[DstAddr]
+Addr                = 01-0C-CD-01-00-11
+Priority            = 6
+VID                 = 000
+Appid               = 0011
+MinTime             = 2
+MaxTime             = 5000
+
+[FCDA1:1去操作箱1]
+Ref                 = P220ML1PROT/GGIO9$ST$Ind1$stVal
+Type                = Bool
+InVarName           = B02.SwitchOut_F0.Go_S0_BIN0
+ACT                 = 1
+
+[FCDA1:1去操作箱2]
+Ref                 = P220ML1PROT/GGIO9$ST$Ind1$stVal
+Type                = Bool
+InVarName           = B02.SwitchOut_F0.Go_S1_BIN0
+ACT                 = 1
+
+[GOOSE Rx]
+numGoCb             = 1
+numInput	        = 3
+
+[GoCB1:从操作箱1来]
+Addr                = 01-0C-CD-01-00-12
+Appid               = 0012
+GoCBRef             = P220ML1CZXIIRD/LLN0$GO$gocb0
+AppID               = P220ML1CZX
+DatSet              = P220ML1CZXIIRD/LLN0$dsGOOSE0
+ConfRev             = 1
+numDatSetEntries    = 3
+
+[INPUT1:从操作箱1来]
+GoCbIndex           = 1
+GoCbEntryIndex      = 1
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind3$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_cb
+
+[INPUT2:从操作箱1来]
+GoCbIndex           = 1
+GoCbEntryIndex      = 2
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind4$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_pdcb
+
+[INPUT3:从操作箱1来]
+GoCbIndex           = 1
+GoCbEntryIndex      = 3
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind2$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_mr
+
+[SMV Rx]
+numSmvCb            = 1
+numInput            = 13
+
+[SMVCB1]
+Addr                = 01-0C-CD-04-00-01
+Appid               = 4001
+SvID               	= ILMU5031RPIT/LLN0$GO$smvcb0
+ConfRev             = 1
+NoASDU				= 1
+NumofSmpdata    	= 22
+
+[INPUT1]
+SmvCbIndex          = 1
+DataIndex      		= 2
+OutVarName          = B02.GetOrigSmpl_F0.ipa_prm
+
+[INPUT2]
+SmvCbIndex          = 1
+DataIndex      		= 4
+OutVarName          = B02.GetOrigSmpl_F0.ipb_prm
+
+[INPUT3]
+SmvCbIndex          = 1
+DataIndex      		= 6
+OutVarName          = B02.GetOrigSmpl_F0.ipc_prm
+
+[INPUT4]
+SmvCbIndex          = 1
+DataIndex      		= 3
+OutVarName          = B03.GetOrigSmpl_F0.ima_prm
+
+[INPUT5]
+SmvCbIndex          = 1
+DataIndex      		= 5
+OutVarName          = B03.GetOrigSmpl_F0.imb_prm
+
+[INPUT6]
+SmvCbIndex          = 1
+DataIndex      		= 7
+OutVarName          = B03.GetOrigSmpl_F0.imc_prm
+
+[INPUT7]
+SmvCbIndex          = 1
+DataIndex      		  = 12
+OutVarName          = B03.LineBAY.recv.Ia_input
+
+[INPUT8]
+SmvCbIndex          = 1
+DataIndex      		  = 13
+OutVarName          = B03.LineBAY.recv.Ib_input
+
+[INPUT9]
+SmvCbIndex          = 1
+DataIndex      		  = 14
+OutVarName          = B03.LineBAY.recv.Ic_input
+
+[INPUT10]
+SmvCbIndex          = 1
+DataIndex      		  = 15
+OutVarName          = B03.LineBAY.recv.Ua_input
+
+[INPUT11]
+SmvCbIndex          = 1
+DataIndex      		  = 17
+OutVarName          = B03.LineBAY.recv.Ub_input
+
+[INPUT12]
+SmvCbIndex          = 1
+DataIndex      		  = 19
+OutVarName          = B03.LineBAY.recv.Uc_input
+
+[INPUT13]
+SmvCbIndex          = 1
+DataIndex      		  = 21
+OutVarName          = B03.LineBAY.recv.Ux_input

@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "iniparser.h": "c",
+        "dictionary.h": "c"
+    }
+}
