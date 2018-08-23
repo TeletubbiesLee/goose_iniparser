@@ -57,7 +57,7 @@ typedef struct TagGooseControlBlock
     uint8_t datSet[MAXSIZE];
     uint32_t confRev;
     uint32_t numDatSetEntriess;
-    uint8_t addr[6];
+    uint8_t addr[8];
     uint32_t priority;
     uint32_t vid;
     uint32_t appid;

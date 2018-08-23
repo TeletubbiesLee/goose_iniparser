@@ -27,7 +27,62 @@ int main(int argc, char* argv[])
     IniToStruct(ini, &gooseTxMassage, &gooseRxMassage);
     iniparser_freedict(ini);
 
-    printf("main: %s\r\n", gooseTxMassage.gocd[0].device.fcda->type);
+    printf("gooseTxMassage:\r\n");
+    printf("numGoCb: %d\r\n", gooseTxMassage.numGoCb);
+    printf("gocd:\r\n");
+    printf("gocbRef: %s\r\n", gooseTxMassage.gocd[0].gocbRef);
+    printf("appID: %s\r\n", gooseTxMassage.gocd[0].appID);
+    printf("datSet: %s\r\n", gooseTxMassage.gocd[0].datSet);
+    printf("confRev: %d\r\n", gooseTxMassage.gocd[0].confRev);
+    printf("numDatSetEntriess: %d\r\n", gooseTxMassage.gocd[0].numDatSetEntriess);
+    printf("addr[5]: %d\r\n", gooseTxMassage.gocd[0].addr[5]);
+    printf("priority: %d\r\n", gooseTxMassage.gocd[0].priority);
+    printf("vid: %d\r\n", gooseTxMassage.gocd[0].vid);
+    printf("appid: %x\r\n", gooseTxMassage.gocd[0].appid);
+    printf("minTime: %d\r\n", gooseTxMassage.gocd[0].minTime);
+    printf("maxTime: %d\r\n", gooseTxMassage.gocd[0].maxTime);
+    printf("fcda1:\r\n");
+    printf("ref: %s\r\n", gooseTxMassage.gocd[0].device.fcda[0].ref);
+    printf("type: %s\r\n", gooseTxMassage.gocd[0].device.fcda[0].type);
+    printf("inVarName: %s\r\n", gooseTxMassage.gocd[0].device.fcda[0].inVarName);
+    printf("act: %d\r\n", gooseTxMassage.gocd[0].device.fcda[0].act);
+    printf("fcda2:\r\n");
+    printf("ref: %s\r\n", gooseTxMassage.gocd[0].device.fcda[1].ref);
+    printf("type: %s\r\n", gooseTxMassage.gocd[0].device.fcda[1].type);
+    printf("inVarName: %s\r\n", gooseTxMassage.gocd[0].device.fcda[1].inVarName);
+    printf("act: %d\r\n", gooseTxMassage.gocd[0].device.fcda[1].act);
+    
+    printf("/*************************************/\r\n");
+    printf("gooseRxMassage:\r\n");
+    printf("numGoCb: %d\r\n", gooseRxMassage.numGoCb);
+    printf("numInput: %d\r\n", gooseRxMassage.num.numInput);
+    printf("gocd:\r\n");
+    printf("addr[5]: %d\r\n", gooseRxMassage.gocd[0].addr[5]);
+    printf("appid: %d\r\n", gooseRxMassage.gocd[0].appid);
+    printf("gocbRef: %s\r\n", gooseRxMassage.gocd[0].gocbRef);
+    printf("appID: %s\r\n", gooseRxMassage.gocd[0].appID);
+    printf("datSet: %s\r\n", gooseRxMassage.gocd[0].datSet);
+    printf("confRev: %d\r\n", gooseRxMassage.gocd[0].confRev);
+    printf("numDatSetEntriess: %d\r\n", gooseRxMassage.gocd[0].numDatSetEntriess);
+    printf("input1:\r\n");
+    printf("gocbIndex: %d\r\n", gooseRxMassage.gocd[0].device.input[0].gocbIndex);
+    printf("gocbEntryIntex: %d\r\n", gooseRxMassage.gocd[0].device.input[0].gocbEntryIntex);
+    printf("ref: %s\r\n", gooseRxMassage.gocd[0].device.input[0].ref);
+    printf("type: %s\r\n", gooseRxMassage.gocd[0].device.input[0].type);
+    printf("outVarName: %s\r\n", gooseRxMassage.gocd[0].device.input[0].outVarName);
+    printf("input2:\r\n");
+    printf("gocbIndex: %d\r\n", gooseRxMassage.gocd[0].device.input[1].gocbIndex);
+    printf("gocbEntryIntex: %d\r\n", gooseRxMassage.gocd[0].device.input[1].gocbEntryIntex);
+    printf("ref: %s\r\n", gooseRxMassage.gocd[0].device.input[1].ref);
+    printf("type: %s\r\n", gooseRxMassage.gocd[0].device.input[1].type);
+    printf("outVarName: %s\r\n", gooseRxMassage.gocd[0].device.input[1].outVarName);
+    printf("input3:\r\n");
+    printf("gocbIndex: %d\r\n", gooseRxMassage.gocd[0].device.input[2].gocbIndex);
+    printf("gocbEntryIntex: %d\r\n", gooseRxMassage.gocd[0].device.input[2].gocbEntryIntex);
+    printf("ref: %s\r\n", gooseRxMassage.gocd[0].device.input[2].ref);
+    printf("type: %s\r\n", gooseRxMassage.gocd[0].device.input[2].type);
+    printf("outVarName: %s\r\n", gooseRxMassage.gocd[0].device.input[2].outVarName);
+
 
     return 0;
 }
@@ -158,31 +213,31 @@ void IniToStruct(const dictionary* dict, GooseTxRxMessage* gooseTxMassage, Goose
                 else if(strncmp(dict->key[i], "GoCB", strlen("GoCB")) == 0)
                 {
                     DictStrTrim(dict->key[i], strTrim);
-                    if(strcmp(dict->key[i], "Addr") == 0)
+                    if(strcmp(strTrim, "Addr") == 0)
                     {
                         AddrToInt(dict->val[i], gooseRxMassage->gocd[numGocb-1].addr);
                     }
-                    else if(strcmp(dict->key[i], "Appid") == 0)
+                    else if(strcmp(strTrim, "Appid") == 0)
                     {
                         gooseRxMassage->gocd[numGocb-1].appid = HexToInt(dict->val[i], 4);
                     }
-                    else if(strcmp(dict->key[i], "GoCBRef") == 0)
+                    else if(strcmp(strTrim, "GoCBRef") == 0)
                     {
                         strncpy(gooseRxMassage->gocd[numGocb-1].gocbRef, dict->val[i], strlen(dict->val[i])+1);
                     }
-                    else if(strcmp(dict->key[i], "AppID") == 0)
+                    else if(strcmp(strTrim, "AppID") == 0)
                     {
                         strncpy(gooseRxMassage->gocd[numGocb-1].appID, dict->val[i], strlen(dict->val[i])+1);
                     }
-                    else if(strcmp(dict->key[i], "DatSet") == 0)
+                    else if(strcmp(strTrim, "DatSet") == 0)
                     {
                         strncpy(gooseRxMassage->gocd[numGocb-1].datSet, dict->val[i], strlen(dict->val[i])+1);
                     }
-                    else if(strcmp(dict->key[i], "ConfRev") == 0)
+                    else if(strcmp(strTrim, "ConfRev") == 0)
                     {
                         gooseRxMassage->gocd[numGocb-1].confRev = CharToInt(dict->val[i]);
                     }
-                    else if(strcmp(dict->key[i], "numDatSetEntries") == 0)
+                    else if(strcmp(strTrim, "numDatSetEntries") == 0)
                     {
                         gooseRxMassage->gocd[numGocb-1].numDatSetEntriess = CharToInt(dict->val[i]);
                         GoInputStructInit(gooseRxMassage);
@@ -191,23 +246,23 @@ void IniToStruct(const dictionary* dict, GooseTxRxMessage* gooseTxMassage, Goose
                 else if(strncmp(dict->key[i], "INPUT", strlen("INPUT")) == 0)
                 {
                     DictStrTrim(dict->key[i], strTrim);
-                    if(strcmp(dict->key[i], "GoCbIndex") == 0)
+                    if(strcmp(strTrim, "GoCbIndex") == 0)
                     {
                         gooseRxMassage->gocd[numGocb-1].device.input[numInput-1].gocbIndex = CharToInt(dict->val[i]);
                     }
-                    else if(strcmp(dict->key[i], "GoCbEntryIndex") == 0)
+                    else if(strcmp(strTrim, "GoCbEntryIndex") == 0)
                     {
                         gooseRxMassage->gocd[numGocb-1].device.input[numInput-1].gocbEntryIntex = CharToInt(dict->val[i]);
                     }
-                    else if(strcmp(dict->key[i], "Ref") == 0)
+                    else if(strcmp(strTrim, "Ref") == 0)
                     {
                         strncpy(gooseRxMassage->gocd[numGocb-1].device.input[numInput-1].ref, dict->val[i], strlen(dict->val[i])+1);
                     }
-                    else if(strcmp(dict->key[i], "Type") == 0)
+                    else if(strcmp(strTrim, "Type") == 0)
                     {
                         strncpy(gooseRxMassage->gocd[numGocb-1].device.input[numInput-1].type, dict->val[i], strlen(dict->val[i])+1);
                     }
-                    else if(strcmp(dict->key[i], "OutVarName") == 0)
+                    else if(strcmp(strTrim, "OutVarName") == 0)
                     {
                         strncpy(gooseRxMassage->gocd[numGocb-1].device.input[numInput-1].outVarName, dict->val[i], strlen(dict->val[i])+1);
                     }
@@ -332,6 +387,12 @@ void GoInputStructInit(GooseTxRxMessage* gooseMassage)
     for(j=0; j<gooseMassage->numGoCb; j++)
     {
         gooseMassage->gocd[j].device.input = (GooseInput*)calloc(sizeof(GooseInput), gooseMassage->gocd[j].numDatSetEntriess);
+        
+        if (!gooseMassage->gocd[j].device.input)
+        {
+            printf("DEBUG:%s():%d:gooseMassage->gocd[j].device.input Malloc Fail!\n", __FUNCTION__, __LINE__);
+            return;
+        }
     }
     
 }
@@ -384,19 +445,19 @@ void AddrToInt(uint8_t* str, uint8_t* ret)
     uint32_t num = 0;
     uint8_t hexStr[5] = {0};           /* 拆分出单个的十六进制值字符串 */
 
-    for(; *pStr!='\0' && num<6; pStr++)
+    for(; *pStr!='\0' && num<strlen(str); pStr++)
     {
         hexStr[i] = *pStr;
         i++;
-        if(i = 2)
+        if(i == 2)
         {
             ret[num] = HexToInt(hexStr, 2);
             num++;
         }
         if(*pStr == '-')
         {
-            continue;
             i = 0;
+            continue;
         }
     }
 
@@ -408,21 +469,20 @@ uint32_t HexToInt(uint8_t* str, uint8_t size)
     uint32_t retVal = 0;            /* 返回值 */
     uint8_t pStr[5] = {0};
     strncpy(pStr, str, size);
-
     for(i=0; i<size; i++)
     {
         retVal *= 16;
-        if((*pStr >= 'A') && (*pStr <= 'F'))
+        if((pStr[i] >= 'A') && (pStr[i] <= 'F'))
         {
-            retVal += *pStr - 'A' + 10;
+            retVal += (pStr[i] - 'A' + 10);
         }
-        else if((*pStr >= 'a') && (*pStr <= 'f'))
+        else if((pStr[i] >= 'a') && (pStr[i] <= 'f'))
         {
-            retVal += *pStr - 'a' + 10;
+            retVal += (pStr[i] - 'a' + 10);
         }
-        else if((*pStr >= '0') && (*pStr <= '9'))
+        else if((pStr[i] >= '0') && (pStr[i] <= '9'))
         {
-            retVal += *pStr - '0';
+            retVal += (pStr[i] - '0');
         }
         else
         {
@@ -431,9 +491,4 @@ uint32_t HexToInt(uint8_t* str, uint8_t size)
     }
 
     return retVal;
-}
-
-void myStrCopy(uint8_t* destStr, uint8_t* srcStr, uint32_t size)
-{
-
 }
