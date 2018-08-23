@@ -6,6 +6,15 @@
    @brief   Parser for ini files.
 */
 /*--------------------------------------------------------------------------*/
+
+/****************************************************************************
+History:
+	1. Date: 2018.08.22
+	Author: Lilei
+	Modification: 将strlwc函数中进行小写转换的语句注释
+****************************************************************************/
+
+
 /*---------------------------- Includes ------------------------------------*/
 #include <ctype.h>
 #include <stdarg.h>
@@ -49,7 +58,8 @@ static const char * strlwc(const char * in, char *out, unsigned len)
     if (in==NULL || out == NULL || len==0) return NULL ;
     i=0 ;
     while (in[i] != '\0' && i < len-1) {
-        //out[i] = (char)tolower((int)in[i]);       /* 需要区分大小写，所以在此不进行小写转换 */
+        /* Lee：goose的ini文件需要区分大小写，所以在此不进行小写转换 */
+        //out[i] = (char)tolower((int)in[i]);
         i++ ;
     }
     out[i] = '\0';

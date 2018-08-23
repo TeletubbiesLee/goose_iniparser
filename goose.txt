@@ -1,13 +1,12 @@
 [GOOSE Tx]
 numGoCb             = 1
-numInput	        = 2
 
 [GoCB1]
 GoCBRef             = P220ML1PROT/LLN0$GO$gocb0
 AppID               = P220ML1Trip
 DatSet              = P220ML1PROT/LLN0$dsGOOSE0
 ConfRev             = 1
-numDatSetEntries    = 2
+numDatSetEntries    = 3
 
 [DstAddr]
 Addr                = 01-0C-CD-01-00-11
@@ -21,6 +20,12 @@ MaxTime             = 5000
 Ref                 = P220ML1PROT/GGIO9$ST$Ind1$stVal
 Type                = Bool
 InVarName           = B02.SwitchOut_F0.Go_S0_BIN0
+ACT                 = 1
+
+[FCDA1:1去操作箱2]
+Ref                 = P220ML1PROT/GGIO9$ST$Ind1$stVal
+Type                = Bool
+InVarName           = B02.SwitchOut_F0.Go_S1_BIN0
 ACT                 = 1
 
 [FCDA1:1去操作箱2]

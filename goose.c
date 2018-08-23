@@ -1,3 +1,15 @@
+
+
+/*-------------------------------------------------------------------------*/
+/**
+   @file    goose.c
+   @author  Lilei
+   @brief   对goose的ini文件进行解析，生成相应的结构体
+*/
+/*--------------------------------------------------------------------------*/
+
+/*------------------------------Include-------------------------------------*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -6,11 +18,16 @@
 #include "iniparser.h"
 #include "goose.h"
 
+/*--------------------------------------------------------------------------*/
+
+
+
 int main(int argc, char* argv[])
 {
     dictionary* ini;
     uint8_t* iniName;
-    GooseTxRxMessage gooseTxMassage, gooseRxMassage;
+    GooseTxMessage gooseTxMassage;
+    GooseRxMessage gooseRxMassage;
 
     GooseMessageInit(&gooseTxMassage, &gooseRxMassage);
 
@@ -29,76 +46,17 @@ int main(int argc, char* argv[])
     iniparser_freedict(ini);
 
 
-    printf("/***************gooseTxMassage**********************/\r\n");
-    printf("gooseTxMassage:\r\n");
-    printf("numGoCb: %d\r\n", gooseTxMassage.numGoCb);
-    printf("gocd:\r\n");
-    printf("gocbRef: %s\r\n", gooseTxMassage.gocd[0].gocbRef);
-    printf("appID: %s\r\n", gooseTxMassage.gocd[0].appID);
-    printf("datSet: %s\r\n", gooseTxMassage.gocd[0].datSet);
-    printf("confRev: %d\r\n", gooseTxMassage.gocd[0].confRev);
-    printf("numDatSetEntriess: %d\r\n", gooseTxMassage.gocd[0].numDatSetEntriess);
-    printf("addr[5]: %d\r\n", gooseTxMassage.gocd[0].addr[5]);
-    printf("priority: %d\r\n", gooseTxMassage.gocd[0].priority);
-    printf("vid: %d\r\n", gooseTxMassage.gocd[0].vid);
-    printf("appid: 0x%x\r\n", gooseTxMassage.gocd[0].appid);
-    printf("minTime: %d\r\n", gooseTxMassage.gocd[0].minTime);
-    printf("maxTime: %d\r\n", gooseTxMassage.gocd[0].maxTime);
-    printf("fcda1:\r\n");
-    printf("ref: %s\r\n", gooseTxMassage.gocd[0].device.fcda[0].ref);
-    printf("type: %s\r\n", gooseTxMassage.gocd[0].device.fcda[0].type);
-    printf("inVarName: %s\r\n", gooseTxMassage.gocd[0].device.fcda[0].inVarName);
-    printf("act: %d\r\n", gooseTxMassage.gocd[0].device.fcda[0].act);
-    printf("fcda2:\r\n");
-    printf("ref: %s\r\n", gooseTxMassage.gocd[0].device.fcda[1].ref);
-    printf("type: %s\r\n", gooseTxMassage.gocd[0].device.fcda[1].type);
-    printf("inVarName: %s\r\n", gooseTxMassage.gocd[0].device.fcda[1].inVarName);
-    printf("act: %d\r\n", gooseTxMassage.gocd[0].device.fcda[1].act);
-    
-    printf("/**************gooseRxMassage***********************/\r\n");
-    printf("gooseRxMassage:\r\n");
-    printf("numGoCb: %d\r\n", gooseRxMassage.numGoCb);
-    printf("numInput: %d\r\n", gooseRxMassage.num.numInput);
-    printf("gocd:\r\n");
-    printf("addr[5]: %d\r\n", gooseRxMassage.gocd[0].addr[5]);
-    printf("appid: %d\r\n", gooseRxMassage.gocd[0].appid);
-    printf("gocbRef: %s\r\n", gooseRxMassage.gocd[0].gocbRef);
-    printf("appID: %s\r\n", gooseRxMassage.gocd[0].appID);
-    printf("datSet: %s\r\n", gooseRxMassage.gocd[0].datSet);
-    printf("confRev: %d\r\n", gooseRxMassage.gocd[0].confRev);
-    printf("numDatSetEntriess: %d\r\n", gooseRxMassage.gocd[0].numDatSetEntriess);
-    printf("input1:\r\n");
-    printf("gocbIndex: %d\r\n", gooseRxMassage.gocd[0].device.input[0].gocbIndex);
-    printf("gocbEntryIntex: %d\r\n", gooseRxMassage.gocd[0].device.input[0].gocbEntryIntex);
-    printf("ref: %s\r\n", gooseRxMassage.gocd[0].device.input[0].ref);
-    printf("type: %s\r\n", gooseRxMassage.gocd[0].device.input[0].type);
-    printf("outVarName: %s\r\n", gooseRxMassage.gocd[0].device.input[0].outVarName);
-    printf("input2:\r\n");
-    printf("gocbIndex: %d\r\n", gooseRxMassage.gocd[0].device.input[1].gocbIndex);
-    printf("gocbEntryIntex: %d\r\n", gooseRxMassage.gocd[0].device.input[1].gocbEntryIntex);
-    printf("ref: %s\r\n", gooseRxMassage.gocd[0].device.input[1].ref);
-    printf("type: %s\r\n", gooseRxMassage.gocd[0].device.input[1].type);
-    printf("outVarName: %s\r\n", gooseRxMassage.gocd[0].device.input[1].outVarName);
-    printf("input3:\r\n");
-    printf("gocbIndex: %d\r\n", gooseRxMassage.gocd[0].device.input[0].gocbIndex);
-    printf("gocbEntryIntex: %d\r\n", gooseRxMassage.gocd[1].device.input[0].gocbEntryIntex);
-    printf("ref: %s\r\n", gooseRxMassage.gocd[0].device.input[2].ref);
-    printf("type: %s\r\n", gooseRxMassage.gocd[0].device.input[2].type);
-    printf("outVarName: %s\r\n", gooseRxMassage.gocd[0].device.input[2].outVarName);
-
-
     return 0;
 }
 
 
-
 /*--------------------------------------------------------------------------*/
-void IniToStruct(const dictionary* dict, GooseTxRxMessage* gooseTxMassage, GooseTxRxMessage* gooseRxMassage)
+void IniToStruct(const dictionary* dict, GooseTxMessage* gooseTxMassage, GooseRxMessage* gooseRxMassage)
 {
     uint32_t i = 0, numGocb = 0, numFcda = 0, numInput = 0;
     uint8_t flag = 0;
     uint8_t strTrim[20] = {0};
-uint8_t a = 0;
+
     if(dict == NULL)
     {
         return ;
@@ -120,7 +78,7 @@ uint8_t a = 0;
                     if(strcmp(strTrim, "numGoCb") == 0)
                     {
                         gooseTxMassage->numGoCb = CharToInt(dict->val[i]);
-                        GocbStructInit(gooseTxMassage);
+                        GocbTxStructInit(gooseTxMassage);
                     }
                 }
                 else if(strncmp(dict->key[i], "GoCB", strlen("GoCB")) == 0)
@@ -181,19 +139,19 @@ uint8_t a = 0;
                     DictStrTrim(dict->key[i], strTrim);
                     if(strcmp(strTrim, "Ref") == 0)
                     {
-                        strncpy(gooseTxMassage->gocd[numGocb-1].device.fcda[numFcda-1].ref, dict->val[i], strlen(dict->val[i])+1);
+                        strncpy(gooseTxMassage->gocd[numGocb-1].fcda[numFcda-1].ref, dict->val[i], strlen(dict->val[i])+1);
                     }
                     else if(strcmp(strTrim, "Type") == 0)
                     {
-                        strncpy(gooseTxMassage->gocd[numGocb-1].device.fcda[numFcda-1].type, dict->val[i], strlen(dict->val[i])+1);
+                        strncpy(gooseTxMassage->gocd[numGocb-1].fcda[numFcda-1].type, dict->val[i], strlen(dict->val[i])+1);
                     }
                     else if(strcmp(strTrim, "InVarName") == 0)
                     {
-                        strncpy(gooseTxMassage->gocd[numGocb-1].device.fcda[numFcda-1].inVarName, dict->val[i], strlen(dict->val[i])+1);
+                        strncpy(gooseTxMassage->gocd[numGocb-1].fcda[numFcda-1].inVarName, dict->val[i], strlen(dict->val[i])+1);
                     }
                     else if(strcmp(strTrim, "ACT") == 0)
                     {
-                        gooseTxMassage->gocd[numGocb-1].device.fcda[numFcda-1].act = CharToInt(dict->val[i]);
+                        gooseTxMassage->gocd[numGocb-1].fcda[numFcda-1].act = CharToInt(dict->val[i]);
                     }
                 }
 
@@ -206,11 +164,12 @@ uint8_t a = 0;
                     if(strcmp(strTrim, "numGoCb") == 0)
                     {
                         gooseRxMassage->numGoCb = CharToInt(dict->val[i]);
-                        GocbStructInit(gooseRxMassage);
+                        GocbRxStructInit(gooseRxMassage);
                     }
                     else if(strcmp(strTrim, "numInput") == 0)
                     {
-                        gooseRxMassage->num.numInput = CharToInt(dict->val[i]);
+                        gooseRxMassage->numInput = CharToInt(dict->val[i]);
+                        GoInputStructInit(gooseRxMassage);
                     }
                 }
                 else if(strncmp(dict->key[i], "GoCB", strlen("GoCB")) == 0)
@@ -243,32 +202,30 @@ uint8_t a = 0;
                     else if(strcmp(strTrim, "numDatSetEntries") == 0)
                     {
                         gooseRxMassage->gocd[numGocb-1].numDatSetEntriess = CharToInt(dict->val[i]);
-                        GoInputStructInit(gooseRxMassage, numGocb-1);
                     }
                 }
                 else if(strncmp(dict->key[i], "INPUT", strlen("INPUT")) == 0)
                 {
                     DictStrTrim(dict->key[i], strTrim);
-                    printf("%s\r\n", strTrim);
                     if(strcmp(strTrim, "GoCbIndex") == 0)
                     {
-                        gooseRxMassage->gocd[numGocb-1].device.input[numInput-1].gocbIndex = CharToInt(dict->val[i]);
+                        gooseRxMassage->input[numInput-1].gocbIndex = CharToInt(dict->val[i]);
                     }
                     else if(strcmp(strTrim, "GoCbEntryIndex") == 0)
                     {
-                        gooseRxMassage->gocd[numGocb-1].device.input[numInput-1].gocbEntryIntex = CharToInt(dict->val[i]);
+                        gooseRxMassage->input[numInput-1].gocbEntryIntex = CharToInt(dict->val[i]);
                     }
                     else if(strcmp(strTrim, "Ref") == 0)
                     {
-                        strncpy(gooseRxMassage->gocd[numGocb-1].device.input[numInput-1].ref, dict->val[i], strlen(dict->val[i])+1);
+                        strncpy(gooseRxMassage->input[numInput-1].ref, dict->val[i], strlen(dict->val[i])+1);
                     }
                     else if(strcmp(strTrim, "Type") == 0)
                     {
-                        strncpy(gooseRxMassage->gocd[numGocb-1].device.input[numInput-1].type, dict->val[i], strlen(dict->val[i])+1);
+                        strncpy(gooseRxMassage->input[numInput-1].type, dict->val[i], strlen(dict->val[i])+1);
                     }
                     else if(strcmp(strTrim, "OutVarName") == 0)
                     {
-                        strncpy(gooseRxMassage->gocd[numGocb-1].device.input[numInput-1].outVarName, dict->val[i], strlen(dict->val[i])+1);
+                        strncpy(gooseRxMassage->input[numInput-1].outVarName, dict->val[i], strlen(dict->val[i])+1);
                     }
                 }
 
@@ -326,70 +283,74 @@ uint8_t a = 0;
     return;
 }
 
-void GooseMessageInit(GooseTxRxMessage* gooseTxMassage, GooseTxRxMessage* gooseRxMassage)
+void GooseMessageInit(GooseTxMessage* gooseTxMassage, GooseRxMessage* gooseRxMassage)
 {
-    gooseTxMassage->flagTxRx = 1;
-    gooseRxMassage->flagTxRx = 2;
 
     gooseTxMassage->numGoCb = 0;
     gooseRxMassage->numGoCb = 0;
 
-    gooseTxMassage->num.numInput = 0;
-    gooseRxMassage->num.numOutput = 0;
+    gooseRxMassage->numInput = 0;
 
     gooseTxMassage->gocd = NULL;
     gooseRxMassage->gocd = NULL;
 
+    gooseRxMassage->input = NULL;
+
 }
 
-void GocbStructInit(GooseTxRxMessage* gooseMassage)
+void GocbTxStructInit(GooseTxMessage* gooseTxMassage)
 {
     uint32_t i = 0;
    
-    gooseMassage->gocd  = (GooseControlBlock*)calloc(sizeof(GooseControlBlock), gooseMassage->numGoCb);
+    gooseTxMassage->gocd  = (GooseControlBlockTx*)calloc(sizeof(GooseControlBlockTx), gooseTxMassage->numGoCb);
    
-    if (!gooseMassage->gocd)
+    if (!gooseTxMassage->gocd)
     {
-        printf("DEBUG:%s():%d:gooseMassage->gocd Malloc Fail!\n", __FUNCTION__, __LINE__);
+        printf("DEBUG:%s():%d:gooseTxMassage->gocd Malloc Fail!\n", __FUNCTION__, __LINE__);
         return;
     }
 
-    for(i=0; i<gooseMassage->numGoCb; i++)
+    for(i=0; i<gooseTxMassage->numGoCb; i++)
     {
-        if(gooseMassage->flagTxRx == 1)
-        {
-            gooseMassage->gocd[i].device.fcda == NULL;
-        }
-        if(gooseMassage->flagTxRx == 2)
-        {
-            gooseMassage->gocd[i].device.input == NULL;
-        }
+         gooseTxMassage->gocd[i].fcda == NULL;
     }
+
 }
 
-
-void FcdaStructInit(GooseTxRxMessage* gooseMassage, uint32_t num)
+void GocbRxStructInit(GooseRxMessage* gooseRxMassage)
 {
-    
-    gooseMassage->gocd[num].device.fcda = (FuncConDatAttr*)calloc(sizeof(FuncConDatAttr), gooseMassage->gocd[num].numDatSetEntriess);
-
-    if (!gooseMassage->gocd[num].device.fcda)
+    gooseRxMassage->gocd  = (GooseControlBlockRx*)calloc(sizeof(GooseControlBlockRx), gooseRxMassage->numGoCb);
+   
+    if (!gooseRxMassage->gocd)
     {
-        printf("DEBUG:%s():%d:gooseMassage->gocd[%d].device.fcda Malloc Fail!\n", __FUNCTION__, __LINE__, num);
+        printf("DEBUG:%s():%d:gooseRxMassage->gocd Malloc Fail!\n", __FUNCTION__, __LINE__);
         return;
     }
 
 }
 
+void FcdaStructInit(GooseTxMessage* gooseTxMassage, uint32_t num)
+{
+    
+    gooseTxMassage->gocd[num].fcda = (FuncConDatAttr*)calloc(sizeof(FuncConDatAttr), gooseTxMassage->gocd[num].numDatSetEntriess);
 
-void GoInputStructInit(GooseTxRxMessage* gooseMassage, uint32_t num)
+    if (!gooseTxMassage->gocd[num].fcda)
+    {
+        printf("DEBUG:%s():%d:gooseTxMassage->gocd[%d].fcda Malloc Fail!\n", __FUNCTION__, __LINE__, num);
+        return;
+    }
+
+}
+
+
+void GoInputStructInit(GooseRxMessage* gooseRxMassage)
 {
 
-    gooseMassage->gocd[num].device.input = (GooseInput*)calloc(sizeof(GooseInput), gooseMassage->gocd[num].numDatSetEntriess);
+    gooseRxMassage->input = (GooseInput*)calloc(sizeof(GooseInput), gooseRxMassage->numInput);
     
-    if (!gooseMassage->gocd[num].device.input)
+    if (!gooseRxMassage->input)
     {
-        printf("DEBUG:%s():%d:gooseMassage->gocd[%d].device.input Malloc Fail!\n", __FUNCTION__, __LINE__, num);
+        printf("DEBUG:%s():%d:gooseRxMassage->input Malloc Fail!\n", __FUNCTION__, __LINE__);
         return;
     }
 
@@ -491,3 +452,6 @@ uint32_t HexToInt(uint8_t* str, uint8_t size)
 
     return retVal;
 }
+
+
+/*------------------------------FILE END---------------------------------------*/

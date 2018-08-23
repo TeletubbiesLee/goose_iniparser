@@ -3,7 +3,7 @@
 /**
    @file    goose.h
    @author  Lilei
-   @brief   
+   @brief   对goose的ini文件进行解析，生成相应的结构体
 */
 /*--------------------------------------------------------------------------*/
 
@@ -19,7 +19,7 @@
 
 
 /*---------------------------------------------------------------------------
-                                New types
+                                New struct types
  ---------------------------------------------------------------------------*/
 
 /**
@@ -31,6 +31,7 @@ typedef struct TagFuncConDatAttr
     uint8_t type[TYPESIZE];
     uint8_t inVarName[MAXSIZE];
     uint32_t act;
+
 }FuncConDatAttr;
 
 
@@ -44,13 +45,28 @@ typedef struct TagGooseInput
     uint8_t ref[MAXSIZE];
     uint8_t type[TYPESIZE];
     uint8_t outVarName[MAXSIZE];
+
 }GooseInput;
 
+/**
+  @brief    struct goose control block rx
+ */
+typedef struct TagGooseControlBlockRx
+{
+    uint8_t addr[8];
+    uint32_t appid;
+    uint8_t gocbRef[MAXSIZE];
+    uint8_t appID[APPIDSIZE];
+    uint8_t datSet[MAXSIZE];
+    uint32_t confRev;
+    uint32_t numDatSetEntriess;
+
+}GooseControlBlockRx;
 
 /**
-  @brief    struct goose control block
+  @brief    struct goose control block tx
  */
-typedef struct TagGooseControlBlock
+typedef struct TagGooseControlBlockTx
 {
     uint8_t gocbRef[MAXSIZE];
     uint8_t appID[APPIDSIZE];
@@ -63,42 +79,48 @@ typedef struct TagGooseControlBlock
     uint32_t appid;
     uint32_t minTime;
     uint32_t maxTime;
-    union {
-        FuncConDatAttr* fcda;          /* Goose Tx Message */
-        GooseInput* input;             /* Goose Rx Message */
-    }device;
-}GooseControlBlock;
+    FuncConDatAttr* fcda;
 
+}GooseControlBlockTx;
 
 /**
-  @brief    struct goose Tx or Rx Message
+  @brief    struct goose Tx Message
  */
-typedef struct TagGooseTxRxMessage
+typedef struct TagGooseTxMessage
 {
-    uint8_t flagTxRx;               /* 1:Tx;  2:Rx  0:error */
     uint32_t numGoCb;
-    union {
-        uint32_t numInput;
-        uint32_t numOutput;
-    }num;
-    GooseControlBlock* gocd;
-}GooseTxRxMessage;
+    GooseControlBlockTx* gocd;
+
+}GooseTxMessage;
+
+/**
+  @brief    struct goose Rx Message
+ */
+typedef struct TagGooseRxMessage
+{
+    uint32_t numGoCb;
+    uint32_t numInput;
+    GooseControlBlockRx* gocd;
+    GooseInput* input;
+
+}GooseRxMessage;
 
 
 
 /*---------------------------------------------------------------------------
                                 Function
  ---------------------------------------------------------------------------*/
-
-void IniToStruct(const dictionary* dict, GooseTxRxMessage* gooseTxMassage, GooseTxRxMessage* gooseRxMassage);
-void GooseMessageInit(GooseTxRxMessage* gooseTxMassage, GooseTxRxMessage* gooseRxMassage);
-void GocbStructInit(GooseTxRxMessage* gooseMassage);
-void FcdaStructInit(GooseTxRxMessage* gooseMassage, uint32_t num);
-void GoInputStructInit(GooseTxRxMessage* gooseMassage, uint32_t num);
+void IniToStruct(const dictionary* dict, GooseTxMessage* gooseTxMassage, GooseRxMessage* gooseRxMassage);
+void GooseMessageInit(GooseTxMessage* gooseTxMassage, GooseRxMessage* gooseRxMassage);
+void GocbTxStructInit(GooseTxMessage* gooseTxMassage);
+void GocbRxStructInit(GooseRxMessage* gooseRxMassage);
+void FcdaStructInit(GooseTxMessage* gooseMassage, uint32_t num);
+void GoInputStructInit(GooseRxMessage* gooseMassage);
 void DictStrTrim(uint8_t* srcStr, uint8_t* destStr);
 uint32_t CharToInt(uint8_t* str);
 void AddrToInt(uint8_t* str, uint8_t* ret);
 uint32_t HexToInt(uint8_t* str, uint8_t size);
+
 
 
 
