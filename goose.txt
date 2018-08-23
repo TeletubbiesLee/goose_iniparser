@@ -1,5 +1,6 @@
 [GOOSE Tx]
 numGoCb             = 1
+numInput	        = 2
 
 [GoCB1]
 GoCBRef             = P220ML1PROT/LLN0$GO$gocb0
@@ -29,8 +30,8 @@ InVarName           = B02.SwitchOut_F0.Go_S1_BIN0
 ACT                 = 1
 
 [GOOSE Rx]
-numGoCb             = 1
-numInput	        = 3
+numGoCb             = 3
+numInput	        = 72
 
 [GoCB1:从操作箱1来]
 Addr                = 01-0C-CD-01-00-12
@@ -39,102 +40,526 @@ GoCBRef             = P220ML1CZXIIRD/LLN0$GO$gocb0
 AppID               = P220ML1CZX
 DatSet              = P220ML1CZXIIRD/LLN0$dsGOOSE0
 ConfRev             = 1
-numDatSetEntries    = 3
+numDatSetEntries    = 24
 
-[INPUT1:从操作箱1来]
+[GoCB2]
+Addr                = 01-0C-CD-01-00-13
+Appid               = 0013
+GoCBRef             = P220ML1CZXIIRD/LLN0$GO$gocb0
+AppID               = P220ML1CZX
+DatSet              = P220ML1CZXIIRD/LLN0$dsGOOSE0
+ConfRev             = 1
+numDatSetEntries    = 24
+
+[GoCB3]
+Addr                = 01-0C-CD-01-00-14
+Appid               = 0014
+GoCBRef             = P220ML1CZXIIRD/LLN0$GO$gocb0
+AppID               = P220ML1CZX
+DatSet              = P220ML1CZXIIRD/LLN0$dsGOOSE0
+ConfRev             = 1
+numDatSetEntries    = 24
+
+[INPUT1]
 GoCbIndex           = 1
 GoCbEntryIndex      = 1
 Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind3$stVal
 Type                = Bool
 OutVarName          = B02.BinInput_F0.GO_cb
 
-[INPUT2:从操作箱1来]
+[INPUT2]
 GoCbIndex           = 1
 GoCbEntryIndex      = 2
 Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind4$stVal
 Type                = Bool
 OutVarName          = B02.BinInput_F0.GO_pdcb
 
-[INPUT3:从操作箱1来]
+[INPUT3]
 GoCbIndex           = 1
 GoCbEntryIndex      = 3
 Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind2$stVal
 Type                = Bool
 OutVarName          = B02.BinInput_F0.GO_mr
 
-[SMV Rx]
-numSmvCb            = 1
-numInput            = 13
-
-[SMVCB1]
-Addr                = 01-0C-CD-04-00-01
-Appid               = 4001
-SvID               	= ILMU5031RPIT/LLN0$GO$smvcb0
-ConfRev             = 1
-NoASDU				= 1
-NumofSmpdata    	= 22
-
-[INPUT1]
-SmvCbIndex          = 1
-DataIndex      		= 2
-OutVarName          = B02.GetOrigSmpl_F0.ipa_prm
-
-[INPUT2]
-SmvCbIndex          = 1
-DataIndex      		= 4
-OutVarName          = B02.GetOrigSmpl_F0.ipb_prm
-
-[INPUT3]
-SmvCbIndex          = 1
-DataIndex      		= 6
-OutVarName          = B02.GetOrigSmpl_F0.ipc_prm
-
 [INPUT4]
-SmvCbIndex          = 1
-DataIndex      		= 3
-OutVarName          = B03.GetOrigSmpl_F0.ima_prm
+GoCbIndex           = 1
+GoCbEntryIndex      = 4
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind2$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_mr
 
 [INPUT5]
-SmvCbIndex          = 1
-DataIndex      		= 5
-OutVarName          = B03.GetOrigSmpl_F0.imb_prm
+GoCbIndex           = 1
+GoCbEntryIndex      = 5
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind3$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_cb
 
 [INPUT6]
-SmvCbIndex          = 1
-DataIndex      		= 7
-OutVarName          = B03.GetOrigSmpl_F0.imc_prm
+GoCbIndex           = 1
+GoCbEntryIndex      = 6
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind4$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_pdcb
 
 [INPUT7]
-SmvCbIndex          = 1
-DataIndex      		  = 12
-OutVarName          = B03.LineBAY.recv.Ia_input
+GoCbIndex           = 1
+GoCbEntryIndex      = 7
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind2$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_mr
 
 [INPUT8]
-SmvCbIndex          = 1
-DataIndex      		  = 13
-OutVarName          = B03.LineBAY.recv.Ib_input
+GoCbIndex           = 1
+GoCbEntryIndex      = 8
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind2$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_mr
 
 [INPUT9]
-SmvCbIndex          = 1
-DataIndex      		  = 14
-OutVarName          = B03.LineBAY.recv.Ic_input
+GoCbIndex           = 1
+GoCbEntryIndex      = 9
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind3$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_cb
 
 [INPUT10]
-SmvCbIndex          = 1
-DataIndex      		  = 15
-OutVarName          = B03.LineBAY.recv.Ua_input
+GoCbIndex           = 1
+GoCbEntryIndex      = 10
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind4$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_pdcb
 
 [INPUT11]
-SmvCbIndex          = 1
-DataIndex      		  = 17
-OutVarName          = B03.LineBAY.recv.Ub_input
+GoCbIndex           = 1
+GoCbEntryIndex      = 11
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind2$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_mr
 
 [INPUT12]
-SmvCbIndex          = 1
-DataIndex      		  = 19
-OutVarName          = B03.LineBAY.recv.Uc_input
+GoCbIndex           = 1
+GoCbEntryIndex      = 12
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind2$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_mr
 
 [INPUT13]
-SmvCbIndex          = 1
-DataIndex      		  = 21
-OutVarName          = B03.LineBAY.recv.Ux_input
+GoCbIndex           = 1
+GoCbEntryIndex      = 13
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind3$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_cb
+
+[INPUT14]
+GoCbIndex           = 1
+GoCbEntryIndex      = 14
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind4$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_pdcb
+
+[INPUT15]
+GoCbIndex           = 1
+GoCbEntryIndex      = 15
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind2$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_mr
+
+[INPUT16]
+GoCbIndex           = 1
+GoCbEntryIndex      = 16
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind2$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_mr
+
+[INPUT17]
+GoCbIndex           = 1
+GoCbEntryIndex      = 17
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind3$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_cb
+
+[INPUT18]
+GoCbIndex           = 1
+GoCbEntryIndex      = 18
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind4$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_pdcb
+
+[INPUT19]
+GoCbIndex           = 1
+GoCbEntryIndex      = 19
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind2$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_mr
+
+[INPUT20]
+GoCbIndex           = 1
+GoCbEntryIndex      = 20
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind2$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_mr
+
+[INPUT21]
+GoCbIndex           = 1
+GoCbEntryIndex      = 21
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind3$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_cb
+
+[INPUT22]
+GoCbIndex           = 1
+GoCbEntryIndex      = 22
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind4$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_pdcb
+
+[INPUT23]
+GoCbIndex           = 1
+GoCbEntryIndex      = 23
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind2$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_mr
+
+[INPUT24]
+GoCbIndex           = 1
+GoCbEntryIndex      = 24
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind2$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_mr
+
+[INPUT25]
+GoCbIndex           = 1
+GoCbEntryIndex      = 1
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind3$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_cb
+
+[INPUT26]
+GoCbIndex           = 1
+GoCbEntryIndex      = 2
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind4$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_pdcb
+
+[INPUT27]
+GoCbIndex           = 1
+GoCbEntryIndex      = 3
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind2$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_mr
+
+[INPUT28]
+GoCbIndex           = 1
+GoCbEntryIndex      = 4
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind2$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_mr
+
+[INPUT29]
+GoCbIndex           = 1
+GoCbEntryIndex      = 5
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind3$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_cb
+
+[INPUT30]
+GoCbIndex           = 1
+GoCbEntryIndex      = 6
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind4$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_pdcb
+
+[INPUT31]
+GoCbIndex           = 1
+GoCbEntryIndex      = 7
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind2$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_mr
+
+[INPUT32]
+GoCbIndex           = 1
+GoCbEntryIndex      = 8
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind2$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_mr
+
+[INPUT33]
+GoCbIndex           = 1
+GoCbEntryIndex      = 9
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind3$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_cb
+
+[INPUT34]
+GoCbIndex           = 1
+GoCbEntryIndex      = 10
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind4$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_pdcb
+
+[INPUT35]
+GoCbIndex           = 1
+GoCbEntryIndex      = 11
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind2$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_mr
+
+[INPUT36]
+GoCbIndex           = 1
+GoCbEntryIndex      = 12
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind2$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_mr
+
+[INPUT37]
+GoCbIndex           = 1
+GoCbEntryIndex      = 13
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind3$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_cb
+
+[INPUT38]
+GoCbIndex           = 1
+GoCbEntryIndex      = 14
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind4$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_pdcb
+
+[INPUT39]
+GoCbIndex           = 1
+GoCbEntryIndex      = 15
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind2$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_mr
+
+[INPUT40]
+GoCbIndex           = 1
+GoCbEntryIndex      = 16
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind2$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_mr
+
+[INPUT41]
+GoCbIndex           = 1
+GoCbEntryIndex      = 17
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind3$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_cb
+
+[INPUT42]
+GoCbIndex           = 1
+GoCbEntryIndex      = 18
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind4$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_pdcb
+
+[INPUT43]
+GoCbIndex           = 1
+GoCbEntryIndex      = 19
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind2$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_mr
+
+[INPUT44]
+GoCbIndex           = 1
+GoCbEntryIndex      = 20
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind2$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_mr
+
+[INPUT45]
+GoCbIndex           = 1
+GoCbEntryIndex      = 21
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind3$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_cb
+
+[INPUT46]
+GoCbIndex           = 1
+GoCbEntryIndex      = 22
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind4$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_pdcb
+
+[INPUT47]
+GoCbIndex           = 1
+GoCbEntryIndex      = 23
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind2$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_mr
+
+[INPUT48]
+GoCbIndex           = 1
+GoCbEntryIndex      = 24
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind2$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_mr
+
+[INPUT49]
+GoCbIndex           = 1
+GoCbEntryIndex      = 1
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind3$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_cb
+
+[INPUT50]
+GoCbIndex           = 1
+GoCbEntryIndex      = 2
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind4$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_pdcb
+
+[INPUT51]
+GoCbIndex           = 1
+GoCbEntryIndex      = 3
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind2$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_mr
+
+[INPUT52]
+GoCbIndex           = 1
+GoCbEntryIndex      = 4
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind2$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_mr
+
+[INPUT53]
+GoCbIndex           = 1
+GoCbEntryIndex      = 5
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind3$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_cb
+
+[INPUT54]
+GoCbIndex           = 1
+GoCbEntryIndex      = 6
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind4$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_pdcb
+
+[INPUT55]
+GoCbIndex           = 1
+GoCbEntryIndex      = 7
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind2$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_mr
+
+[INPUT56]
+GoCbIndex           = 1
+GoCbEntryIndex      = 8
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind2$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_mr
+
+[INPUT57]
+GoCbIndex           = 1
+GoCbEntryIndex      = 9
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind3$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_cb
+
+[INPUT58]
+GoCbIndex           = 1
+GoCbEntryIndex      = 10
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind4$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_pdcb
+
+[INPUT59]
+GoCbIndex           = 1
+GoCbEntryIndex      = 11
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind2$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_mr
+
+[INPUT60]
+GoCbIndex           = 1
+GoCbEntryIndex      = 12
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind2$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_mr
+
+[INPUT61]
+GoCbIndex           = 1
+GoCbEntryIndex      = 13
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind3$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_cb
+
+[INPUT62]
+GoCbIndex           = 1
+GoCbEntryIndex      = 14
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind4$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_pdcb
+
+[INPUT63]
+GoCbIndex           = 1
+GoCbEntryIndex      = 15
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind2$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_mr
+
+[INPUT64]
+GoCbIndex           = 1
+GoCbEntryIndex      = 16
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind2$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_mr
+
+[INPUT65]
+GoCbIndex           = 1
+GoCbEntryIndex      = 17
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind3$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_cb
+
+[INPUT66]
+GoCbIndex           = 1
+GoCbEntryIndex      = 18
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind4$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_pdcb
+
+[INPUT67]
+GoCbIndex           = 1
+GoCbEntryIndex      = 19
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind2$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_mr
+
+[INPUT68]
+GoCbIndex           = 1
+GoCbEntryIndex      = 20
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind2$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_mr
+
+[INPUT69]
+GoCbIndex           = 1
+GoCbEntryIndex      = 21
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind3$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_cb
+
+[INPUT70]
+GoCbIndex           = 1
+GoCbEntryIndex      = 22
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind4$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_pdcb
+
+[INPUT71]
+GoCbIndex           = 1
+GoCbEntryIndex      = 23
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind2$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_mr
+
+[INPUT72]
+GoCbIndex           = 1
+GoCbEntryIndex      = 24
+Ref                 = P220ML1CZXIIRD/GGIO5$ST$Ind2$stVal
+Type                = Bool
+OutVarName          = B02.BinInput_F0.GO_mr

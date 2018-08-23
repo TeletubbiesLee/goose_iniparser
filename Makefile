@@ -14,8 +14,8 @@ default: all
 
 all: goose 
 
-goose: goose.c
-	$(CC) $(CFLAGS) -o goose goose.c  -L. -liniparser
+goose: goose.c iniparser.c dictionary.c
+	$(CC) $(CFLAGS) -o goose goose.c  iniparser.c dictionary.c
 
 clean veryclean:
 	$(RM) goose

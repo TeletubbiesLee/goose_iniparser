@@ -93,8 +93,8 @@ typedef struct TagGooseTxRxMessage
 void IniToStruct(const dictionary* dict, GooseTxRxMessage* gooseTxMassage, GooseTxRxMessage* gooseRxMassage);
 void GooseMessageInit(GooseTxRxMessage* gooseTxMassage, GooseTxRxMessage* gooseRxMassage);
 void GocbStructInit(GooseTxRxMessage* gooseMassage);
-void FcdaStructInit(GooseTxRxMessage* gooseMassage);
-void GoInputStructInit(GooseTxRxMessage* gooseMassage);
+void FcdaStructInit(GooseTxRxMessage* gooseMassage, uint32_t num);
+void GoInputStructInit(GooseTxRxMessage* gooseMassage, uint32_t num);
 void DictStrTrim(uint8_t* srcStr, uint8_t* destStr);
 uint32_t CharToInt(uint8_t* str);
 void AddrToInt(uint8_t* str, uint8_t* ret);
