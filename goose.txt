@@ -28,7 +28,7 @@ Type                = Bool
 InVarName           = B02.SwitchOut_F0.Go_S1_BIN0
 ACT                 = 1
 
-[FCDA1:1去操作箱2]
+[FCDA1:1去操作箱3]
 Ref                 = P220ML1PROT/GGIO9$ST$Ind1$stVal
 Type                = Bool
 InVarName           = B02.SwitchOut_F0.Go_S1_BIN0
