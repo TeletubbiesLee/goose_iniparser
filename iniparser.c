@@ -12,6 +12,13 @@ History:
 	1. Date: 2018.08.22
 	Author: Lilei
 	Modification: 将strlwc函数中进行小写转换的语句注释
+    2. Date: 2018.08.27
+	Author: Lilei
+	Modification: 将iniparser_load函数中进行使用C标准文件操作的函数更换为POSIX支持
+                  的API函数
+    3. Date: 2018.08.27
+	Author: Lilei
+	Modification: 添加MyRead函数
 ****************************************************************************/
 
 
@@ -20,9 +27,15 @@ History:
 #include <stdarg.h>
 #include "iniparser.h"
 
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+
 /*---------------------------- Defines -------------------------------------*/
 #define ASCIILINESZ         (1024)
 #define INI_INVALID_KEY     ((char*)-1)
+
+
 
 /*---------------------------------------------------------------------------
                         Private to this module
@@ -38,6 +51,47 @@ typedef enum _line_status_ {
     LINE_SECTION,
     LINE_VALUE
 } line_status ;
+
+/*-------------------------------------------------------------------------*/
+/**
+  @brief    从文件中读取一行内容
+  @param    fd 文件描述符
+  @param    buf 读取到的内容存放在该缓冲区
+  @param    size 缓存区大小
+  @return   最终一共读取到的字节数
+
+  从文件中读取一行内容，即读取到第一个'\n'，即结束读取，或者该文件已经读取完，到达
+  文件结尾。将读取到的内容存放在buf缓冲区中，buf缓冲区大小为size，读取内容不会超过
+  缓冲区的大小
+
+ */
+/*--------------------------------------------------------------------------*/
+static int MyRead(int fd, char* buf, int size)
+{
+    int num = 0;
+    int i = 0;
+    char temBuf[2] = {0};
+    for(i=0; i<size; i++)
+    {
+        num = read(fd, temBuf, 1);
+        if(temBuf[0] == '\n')
+        {
+            buf[i] = temBuf[0];
+            i++;
+            break;
+        }
+        else if(num > 0)
+        {
+            buf[i] = temBuf[0];
+        }
+        else
+        {
+            break;
+        }
+    }
+    
+    return i;
+}
 
 /*-------------------------------------------------------------------------*/
 /**
@@ -723,7 +777,10 @@ static line_status iniparser_line(
 /*--------------------------------------------------------------------------*/
 dictionary * iniparser_load(const char * ininame)
 {
-    FILE * in ;
+    // FILE * in ;
+    int in = 0;
+    int eof = 0;
+    char eofBuf[2] = {0};
 
     char line    [ASCIILINESZ+1] ;
     char section [ASCIILINESZ+1] ;
@@ -739,14 +796,16 @@ dictionary * iniparser_load(const char * ininame)
 
     dictionary * dict ;
 
-    if ((in=fopen(ininame, "r"))==NULL) {
+    // if ((in=fopen(ininame, "r"))==NULL) {
+    if ((in = open(ininame, O_RDONLY, 0)) == -1) {
         iniparser_error_callback("iniparser: cannot open %s\n", ininame);
         return NULL ;
     }
 
     dict = dictionary_new(0) ;
     if (!dict) {
-        fclose(in);
+        // fclose(in);
+        close(in);
         return NULL ;
     }
 
@@ -756,19 +815,30 @@ dictionary * iniparser_load(const char * ininame)
     memset(val,     0, ASCIILINESZ);
     last=0 ;
 
-    while (fgets(line+last, ASCIILINESZ-last, in)!=NULL) {
+    // while (fgets(line+last, ASCIILINESZ-last, in)!=NULL) {
+    /* Lee：读取一行，将操作文件的C标准库函数，全部换为POSIX的API函数 */
+    while (MyRead(in, line+last, ASCIILINESZ-last) != 0) {
         lineno++ ;
         len = (int)strlen(line)-1;
         if (len<=0)
             continue;
         /* Safety check against buffer overflows */
-        if (line[len]!='\n' && !feof(in)) {
+        // if (line[len]!='\n' && !feof(in)) {
+        eofBuf[0] = 0;
+        eof = read(in, eofBuf, 1);
+        if(eof > 0)
+        {
+            lseek(in, -1, SEEK_CUR);
+        }
+        
+        if ((line[len] != '\n') && eof) {
             iniparser_error_callback(
               "iniparser: input line too long in %s (%d)\n",
               ininame,
               lineno);
             dictionary_del(dict);
-            fclose(in);
+            // fclose(in);
+            close(in);
             return NULL ;
         }
         /* Get rid of \n and spaces at end of line */
@@ -825,7 +895,8 @@ dictionary * iniparser_load(const char * ininame)
         dictionary_del(dict);
         dict = NULL ;
     }
-    fclose(in);
+    // fclose(in);
+    close(in);
     return dict ;
 }
 
@@ -844,5 +915,4 @@ void iniparser_freedict(dictionary * d)
 {
     dictionary_del(d);
 }
-
 

@@ -16,19 +16,19 @@ Appid               = 0011
 MinTime             = 2
 MaxTime             = 5000
 
-[FCDA1:1去操作箱1]
+[FCDA1:11]
 Ref                 = P220ML1PROT/GGIO9$ST$Ind1$stVal
 Type                = Bool
 InVarName           = B02.SwitchOut_F0.Go_S0_BIN0
 ACT                 = 1
 
-[FCDA1:1去操作箱2]
+[FCDA1:12]
 Ref                 = P220ML1PROT/GGIO9$ST$Ind1$stVal
 Type                = Bool
 InVarName           = B02.SwitchOut_F0.Go_S1_BIN0
 ACT                 = 1
 
-[FCDA1:1去操作箱3]
+[FCDA1:13]
 Ref                 = P220ML1PROT/GGIO9$ST$Ind1$stVal
 Type                = Bool
 InVarName           = B02.SwitchOut_F0.Go_S1_BIN0
@@ -38,7 +38,7 @@ ACT                 = 1
 numGoCb             = 3
 numInput	        = 72
 
-[GoCB1:从操作箱1来]
+[GoCB1]
 Addr                = 01-0C-CD-01-00-12
 Appid               = 0012
 GoCBRef             = P220ML1CZXIIRD/LLN0$GO$gocb0
